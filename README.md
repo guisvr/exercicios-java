@@ -13,3 +13,5 @@ Desenvolvi uma aplicação para controle de produtos que simula operações reai
 
 ## Como executar
 Basta compilar os arquivos na pasta `src` e rodar a classe `Principal.java`.
+
+Neste projeto, o meu maior foco foi entender como manipular objetos dentro de uma lista. Foi um exercício importante para consolidar o uso de ArrayList em vez de arrays fixos, o que permitiu criar uma lógica de reajuste de preços que percorre todo o estoque de forma dinâmica. Também aproveitei para praticar o fluxo de trabalho com Git, aprendendo a lidar com versões e organização de pastas diretamente pelo terminal.
