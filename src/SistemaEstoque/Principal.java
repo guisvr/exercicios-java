@@ -2,7 +2,7 @@ package SistemaEstoque;
 
 import java.util.ArrayList;
 
-public class Princpal {
+public class Principal {
     public static void main(String[] args) {
 
         ArrayList<Produto> listaDeProdutos = new ArrayList<>();
