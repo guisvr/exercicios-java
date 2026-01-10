@@ -1,18 +1,12 @@
-## Getting Started
+# Exercícios de Java - Estudo de POO
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Repositório dedicado ao aprendizado de Java e Programação Orientada a Objetos.
 
-## Folder Structure
+## 🚀 Destaque: Sistema de Gestão de Estoque
+Este projeto simula o controle de produtos de uma loja, aplicando conceitos fundamentais de desenvolvimento.
 
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+### ✅ O que foi implementado:
+* **Encapsulamento**: Atributos privados e métodos acessores (Getters).
+* **Coleções (ArrayList)**: Armazenamento e manipulação dinâmica de múltiplos produtos.
+* **Lógica de Reajuste**: Método para aplicar percentuais de desconto ou aumento.
+* **Cálculo Patrimonial**: Lógica para somar o valor total baseado no preço e na quantidade em estoque.
