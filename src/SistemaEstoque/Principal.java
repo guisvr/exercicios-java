@@ -25,15 +25,7 @@ public class Principal {
 
         int opcao = 0;
         while (opcao != 6) {
-            System.out.println("\n---SISTEMA DE ESTOQUE---");
-            System.out.println("1. Ver relatório.");
-            System.out.println("2. Buscar produto.");
-            System.out.println("3. Remover produto.");
-            System.out.println("4. Cadastrar produto.");
-            System.out.println("5. Exibir valor total do estoque.");
-            System.out.println("6. Sair.");
-            System.out.println("Escolha uma opção.");
-
+            exibirOpcoes();
             opcao = leitura.nextInt();
             leitura.nextLine();
 
@@ -47,34 +39,20 @@ public class Principal {
                     break;
 
                 case 2:
-                    System.out.println("Qual item deseja buscar?");
-                    String busca = leitura.nextLine();
 
-                    boolean encontrado = false;
-
-                    for (Produto p : listaDeProdutos) {
-                        if (p.getNome().equalsIgnoreCase(busca)) {
-                            System.out.println("Produto encontrado.");
-                            p.exibirInformações();
-                            encontrado = true;
-                            break;
-                        }
-                    }
-
-                    if (!encontrado) {
-                        System.out.println("Produto não encontrado.");
-                    }
-                    break;
-
+                realizarBusca(listaDeProdutos, leitura);
+                break;
+                  
                 case 3:
+
                     System.out.println("Qual item deseja remover?");
                     String remover = leitura.nextLine();
                     listaDeProdutos.removeIf(p -> p.getNome().equalsIgnoreCase(remover));
                     System.out.println("Item removido.");
                     break;
 
-                case 4: 
-                
+                case 4:
+
                     System.out.println("Nome do produto: ");
                     String nomeNovo = leitura.nextLine();
 
@@ -92,12 +70,12 @@ public class Principal {
 
                 case 5:
 
-                double total = 0;
-                for ( Produto p : listaDeProdutos){
-                    total += (p.getPreco() * p.getQuantidadeEstoque());
-                }
-                System.out.println("O valor total do estoque é: R$" + total);
-                break;
+                    double total = 0;
+                    for (Produto p : listaDeProdutos) {
+                        total += (p.getPreco() * p.getQuantidadeEstoque());
+                    }
+                    System.out.println("O valor total do estoque é: R$" + total);
+                    break;
 
                 case 6:
                     System.out.println("Encerrando programa.");
@@ -113,24 +91,26 @@ public class Principal {
         // double somaTotal = 0;
 
         // for (Produto p : listaDeProdutos) {
-        //     p.exibirInformações();
+        // p.exibirInformações();
 
-        //     somaTotal += (p.getPreco() * p.getQuantidadeEstoque());
+        // somaTotal += (p.getPreco() * p.getQuantidadeEstoque());
         // }
 
-        // System.out.println("A soma total de todos os itens é estoque é de R$" + somaTotal);
+        // System.out.println("A soma total de todos os itens é estoque é de R$" +
+        // somaTotal);
 
         // System.out.println("--------------\\----------------------\\----------------");
 
         // double novaSoma = 0;
 
         // for (Produto p : listaDeProdutos) {
-        //     p.reajustarPreco(20);
-        //     p.exibirInformações();
-        //     novaSoma += (p.getPreco() * p.getQuantidadeEstoque());
+        // p.reajustarPreco(20);
+        // p.exibirInformações();
+        // novaSoma += (p.getPreco() * p.getQuantidadeEstoque());
         // }
 
-        // System.out.println("Novo valor total do estoque após o desconto: R$" + novaSoma);
+        // System.out.println("Novo valor total do estoque após o desconto: R$" +
+        // novaSoma);
 
         // System.out.println("---BUSCA POR NOME---");
         // for (Produto p : listaDeProdutos) {
@@ -154,4 +134,29 @@ public class Principal {
         // System.out.println("Valor total do estoque após desconto de 50%: R$" +
         // somaTotalPosDesconto);
     }
+
+    public static void exibirOpcoes() {
+        System.out.println("\n--- SISTEMA DE ESTOQUE ---");
+        System.out.println("1. Ver relatório");
+        System.out.println("2. Buscar produto");
+        System.out.println("3. Remover produto");
+        System.out.println("4. Valor Total");
+        System.out.println("5. Adicionar produto");
+        System.out.println("6. Sair");
+        System.out.print("Escolha uma opção: ");
+        System.out.println();
+    }
+
+    public static void realizarBusca(ArrayList<Produto> lista, Scanner sc) {
+    System.out.print("Nome para busca: ");
+    String nome = sc.nextLine();
+    
+    for (Produto p : lista) {
+        if (p.getNome().equalsIgnoreCase(nome)) {
+            p.exibirInformações();
+            return;
+        }
+    }
+    System.out.println("Não encontrado.");
+}
 }
