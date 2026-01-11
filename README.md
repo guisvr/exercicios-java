@@ -15,3 +15,17 @@ Desenvolvi uma aplicação para controle de produtos que simula operações reai
 Basta compilar os arquivos na pasta `src` e rodar a classe `Principal.java`.
 
 Neste projeto, o meu maior foco foi entender como manipular objetos dentro de uma lista. Foi um exercício importante para consolidar o uso de ArrayList em vez de arrays fixos, o que permitiu criar uma lógica de reajuste de preços que percorre todo o estoque de forma dinâmica. Também aproveitei para praticar o fluxo de trabalho com Git, aprendendo a lidar com versões e organização de pastas diretamente pelo terminal.
+
+---------------------\\---------------------------\\----------------------------\\-----------------------------
+##  Funcionalidades Atuais
+
+O sistema evoluiu e agora conta com um menu interativo que permite:
+
+* **Exibir Relatório:** Lista todos os produtos cadastrados com seus detalhes.
+* **Busca Dinâmica:** Pesquisa produtos pelo nome através da entrada do usuário.
+* **Gestão de Estoque:** É possível adicionar novos produtos e remover itens existentes durante a execução.
+* **Cálculo de Patrimônio:** Opção para visualizar o valor total financeiro de todos os itens em estoque.
+
+##  Tecnologias Utilizadas
+* Java (Lógica de POO, ArrayLists, Loops e Switch-Case)
+* Scanner (Interação via terminal)
