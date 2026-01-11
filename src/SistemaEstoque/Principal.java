@@ -86,39 +86,6 @@ public class Principal {
             }
         }
 
-        // System.out.println("RELÁTÓRIO DE ESTOQUE");
-
-        // double somaTotal = 0;
-
-        // for (Produto p : listaDeProdutos) {
-        // p.exibirInformações();
-
-        // somaTotal += (p.getPreco() * p.getQuantidadeEstoque());
-        // }
-
-        // System.out.println("A soma total de todos os itens é estoque é de R$" +
-        // somaTotal);
-
-        // System.out.println("--------------\\----------------------\\----------------");
-
-        // double novaSoma = 0;
-
-        // for (Produto p : listaDeProdutos) {
-        // p.reajustarPreco(20);
-        // p.exibirInformações();
-        // novaSoma += (p.getPreco() * p.getQuantidadeEstoque());
-        // }
-
-        // System.out.println("Novo valor total do estoque após o desconto: R$" +
-        // novaSoma);
-
-        // System.out.println("---BUSCA POR NOME---");
-        // for (Produto p : listaDeProdutos) {
-        // if (p.getNome().equalsIgnoreCase("Sofá")) {
-        // System.out.println("Produto encontrado! Preço:R$" + p.getPreco());
-        // }
-        // }
-
         // System.out.println("---DESCONTO DE 50%---");
 
         // double somaTotalPosDesconto = 0;
