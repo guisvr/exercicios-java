@@ -25,7 +25,7 @@ public class Principal {
         listaDeProdutos.add(p5);
         listaDeProdutos.add(p6);
 
-        aplicarDescontoPerecivel(listaDeProdutos);
+        // aplicarDescontoPerecivel(listaDeProdutos);
 
         int opcao = 0;
         while (opcao != 7) {
@@ -65,6 +65,10 @@ public class Principal {
                         break;
 
                     case 8:
+                        aplicarPromocaoRelampago(listaDeProdutos);
+                        break;
+
+                    case 9:
                         System.out.println("Encerrando programa.");
                         break;
 
@@ -103,7 +107,8 @@ public class Principal {
         System.out.println("5. Patrimônio total");
         System.out.println("6. Exibir estatisticas.");
         System.out.println("7. verificar estoque crítico.");
-        System.out.println("8. Sair");
+        System.out.println("8. Aplicar cupom de desconto.");
+        System.out.println("9. Sair");
         System.out.print("Escolha uma opção: ");
         System.out.println();
     }
@@ -287,6 +292,19 @@ public class Principal {
         }
         if (!encontrouCritico) {
             System.out.println("Nenhum item em nível críticio.");
+        }
+    }
+
+    public static void aplicarPromocaoRelampago(ArrayList<Produto> lista) {
+        System.out.println("APLICANDO DESCONTO DE 20%");
+        for (Produto p : lista) {
+            if (p instanceof Promocional) {
+                System.out.println("O produto " + p.getNome() + " teve o preço reduzido.");
+                Promocional itemComPromo = (Promocional) p;
+                itemComPromo.aplicarCupom(20);    
+            } else {
+                System.out.println("O produto " + p.getNome() + " não é promocional.");
+            }
         }
     }
 }

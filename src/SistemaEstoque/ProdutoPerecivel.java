@@ -1,6 +1,6 @@
 package SistemaEstoque;
 
-public class ProdutoPerecivel extends Produto{
+public class ProdutoPerecivel extends Produto implements Promocional{
 
     private String dataValidade;
 
@@ -18,5 +18,11 @@ public class ProdutoPerecivel extends Produto{
     @Override
     public double calcularImposto(){
         return this.getPreco() * 0.05;
+    }
+
+    @Override
+    public void aplicarCupom(double porcentagem){
+        this.reajustarPreco(-porcentagem);
+        System.out.println("Cupom de " + porcentagem + "% aplicado com sucesso.");
     }
 }
