@@ -5,27 +5,37 @@ import java.util.Scanner;
 
 import java.util.ArrayList;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.File;
+
 public class Principal {
     public static void main(String[] args) {
 
+        ArrayList<Produto> listaDeProdutos = carregarDados();
+
         Scanner leitura = new Scanner(System.in);
-        ArrayList<Produto> listaDeProdutos = new ArrayList<>();
+        // ArrayList<Produto> listaDeProdutos = new ArrayList<>();
 
-        Produto p1 = new ProdutoComum("Cadeira", 450, 30);
-        Produto p2 = new ProdutoComum("Tapete", 200, 10);
-        Produto p3 = new ProdutoComum("Mesa", 1000, 15);
-        Produto p4 = new ProdutoComum("Sofá", 2000, 5);
-        Produto p5 = new ProdutoComum("Cortina", 150, 13);
-        ProdutoPerecivel p6 = new ProdutoPerecivel("Leite", 6, 200, "13/01/2026");
-        ProdutoLimpeza p7 = new ProdutoLimpeza("Detergente", 2.50, 50);
+        // Produto p1 = new ProdutoComum("Cadeira", 450, 30);
+        // Produto p2 = new ProdutoComum("Tapete", 200, 10);
+        // Produto p3 = new ProdutoComum("Mesa", 1000, 15);
+        // Produto p4 = new ProdutoComum("Sofá", 2000, 5);
+        // Produto p5 = new ProdutoComum("Cortina", 150, 13);
+        // ProdutoPerecivel p6 = new ProdutoPerecivel("Leite", 6, 200, "13/01/2026");
+        // ProdutoLimpeza p7 = new ProdutoLimpeza("Detergente", 2.50, 50);
 
-        listaDeProdutos.add(p1);
-        listaDeProdutos.add(p2);
-        listaDeProdutos.add(p3);
-        listaDeProdutos.add(p4);
-        listaDeProdutos.add(p5);
-        listaDeProdutos.add(p6);
-        listaDeProdutos.add(p7);
+        // listaDeProdutos.add(p1);
+        // listaDeProdutos.add(p2);
+        // listaDeProdutos.add(p3);
+        // listaDeProdutos.add(p4);
+        // listaDeProdutos.add(p5);
+        // listaDeProdutos.add(p6);
+        // listaDeProdutos.add(p7);
 
         // aplicarDescontoPerecivel(listaDeProdutos);
 
@@ -71,6 +81,7 @@ public class Principal {
                         break;
 
                     case 9:
+                        salvarDados(listaDeProdutos);
                         System.out.println("Encerrando programa.");
                         break;
 
@@ -146,48 +157,39 @@ public class Principal {
     }
 
     public static void cadastrarProduto(ArrayList<Produto> lista, Scanner sc) {
-        System.out.println("Nome do produto: ");
-        String nomeNovo = sc.nextLine();
 
-        boolean precoValido = false;
-        double precoNovo = 0;
-
-        while (!precoValido) {
-            try {
-                System.out.println("Preço: R$");
-                precoNovo = sc.nextDouble();
-                if (precoNovo > 0) {
-                    precoValido = true;
-                } else {
-                    System.out.println("Preço inválido. Preço deve ser maior que zero.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Erro! Digite um valor válido.");
-                sc.next();
-            }
-        }
-        int qtdNovo = 0;
-        boolean qtdValida = false;
-
-        while (!qtdValida) {
-            try {
-                System.out.println("Quantidade em estoque: ");
-                qtdNovo = sc.nextInt();
-                if (qtdNovo > 0) {
-                    qtdValida = true;
-                } else {
-                    System.out.println("Quantidade inválida. Valor deve ser maior que zero.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Erro! Digite um valor válido.");
-                sc.next();
-            }
-        }
+        System.out.println("\n---NOVO PRODUTO---");
+        System.out.println("1=Comum | 2=Perecível | 3=Limpeza");
+        int tipo = sc.nextInt();
         sc.nextLine();
-        Produto pNovo = new ProdutoComum(nomeNovo, precoNovo, qtdNovo);
-        lista.add(pNovo);
 
-        System.out.println("Produto cadastrado.");
+        System.out.println("Nome do produto: ");
+        String nome = sc.nextLine();
+
+        double preco = lerPrecoValido(sc);
+        int qtd = lerQtdValida(sc);
+        sc.nextLine();
+
+        switch (tipo) {
+            case 1:
+                lista.add(new ProdutoComum(nome, preco, qtd));
+                break;
+
+            case 2:
+                System.out.println("Data de validade: ");
+                String validade = sc.nextLine();
+                lista.add(new ProdutoPerecivel(nome, preco, qtd, validade));
+                break;
+
+            case 3:
+                lista.add(new ProdutoLimpeza(nome, preco, qtd));
+                break;
+
+            default:
+                System.out.println("Tipo inválido. Cadastrado como comum por padrão.");
+                lista.add(new ProdutoComum(nome, preco, qtd));
+        }
+        System.out.println("Produto cadastrado com sucesso.");
     }
 
     public static void calcularPatrimonio(ArrayList<Produto> lista) {
@@ -303,10 +305,99 @@ public class Principal {
             if (p instanceof Promocional) {
                 System.out.println("O produto " + p.getNome() + " teve o preço reduzido.");
                 Promocional itemComPromo = (Promocional) p;
-                itemComPromo.aplicarCupom(20);    
+                itemComPromo.aplicarCupom(20);
             } else {
                 System.out.println("O produto " + p.getNome() + " não é promocional.");
             }
         }
+    }
+
+    public static double lerPrecoValido(Scanner sc) {
+        while (true) {
+            try {
+                System.out.println("Preço: ");
+                double preco = sc.nextDouble();
+                if (preco > 0)
+                    return preco;
+                System.out.println("Preço deve ser maior que zero.");
+            } catch (InputMismatchException e) {
+                System.out.println("Digite um preço válido.");
+                sc.next();
+            }
+        }
+    }
+
+    public static int lerQtdValida(Scanner sc) {
+        while (true) {
+            try {
+                System.out.println("Quantidade em estoque: ");
+                int qtd = sc.nextInt();
+                if (qtd > 0)
+                    return qtd;
+                System.out.println("A quantidade não pode ser negativa.");
+            } catch (InputMismatchException e) {
+                System.out.println("Digite uma quantidade válida.");
+                sc.next();
+            }
+        }
+    }
+
+    public static void salvarDados(ArrayList<Produto> lista) {
+        String nomeArquivo = "estoque.txt";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo))) {
+            for (Produto p : lista) {
+                String validade = "";
+
+                if (p instanceof ProdutoPerecivel) {
+                    validade = ((ProdutoPerecivel) p).getDataValidade();
+                }
+
+                String linha = p.getClass().getSimpleName() + "|" +
+                        p.getNome() + "|" +
+                        p.getPreco() + "|" +
+                        p.getQuantidadeEstoque() + "|" +
+                        validade; // Adicionamos a validade no final
+
+                writer.write(linha);
+                writer.newLine();
+            }
+            System.out.println("Dados salvos com sucesso em " + nomeArquivo);
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar os dados: " + e.getMessage());
+        }
+    }
+
+    public static ArrayList<Produto> carregarDados() {
+        ArrayList<Produto> listaCarregada = new ArrayList<>();
+        File arquivo = new File("estoque.txt");
+
+        if (!arquivo.exists())
+            return listaCarregada;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] partes = linha.split("\\|");
+
+                String tipo = partes[0];
+                String nome = partes[1];
+                double preco = Double.parseDouble(partes[2]);
+                int qtd = Integer.parseInt(partes[3]);
+                String validade = partes.length > 4 ? partes[4] : "";
+
+                if (tipo.equals("ProdutoComum")) {
+                    listaCarregada.add(new ProdutoComum(nome, preco, qtd));
+                } else if (tipo.equals("ProdutoPerecivel")) {
+                    listaCarregada.add(new ProdutoPerecivel(nome, preco, qtd, validade));
+                } else if (tipo.equals("ProdutoLimpeza")) {
+                    listaCarregada.add(new ProdutoLimpeza(nome, preco, qtd));
+                }
+            }
+            System.out.println("Estoque carregado com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar dados: " + e.getMessage());
+        }
+        return listaCarregada;
     }
 }

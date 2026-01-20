@@ -1,0 +1,2 @@
+ProdutoPerecivel|Queijo|22.0|1|
+ProdutoPerecivel|Canre|30.0|10|22/01/2026
